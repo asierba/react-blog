@@ -1,7 +1,7 @@
 {
   "name": "psadmin",
   "version": "1.0.0",
-  "description": "",
+  "description": "small aplication created to learn react and flux",
   "main": "index.js",
   "dependencies": {
     "bootstrap": "^3.3.7",
@@ -13,12 +13,19 @@
     "gulp-open": "^2.0.0",
     "jquery": "^3.2.1",
     "reactify": "^1.1.1",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "flux": "^2.0.3"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository" : {
+    "type" : "git",
+    "url" : "file://.git"
+  }
 }
