@@ -1,5 +1,5 @@
 $ = jQuery = require('jquery');
 
-var App = console.log('hellowwww');
+var App = {};
 
 module.exports = App;
