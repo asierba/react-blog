@@ -1,6 +1,10 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var open = require('gulp-open');
+const browserify = require('browserify');
+const reactify = require('reactify');
+const source = require('vinyl-source-stream');
+const concat = require('gulp-concat');
 
 var config = {
     port: 9005,
@@ -38,8 +42,27 @@ gulp.task('html', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('watch', function() {
-    gulp.watch(config.paths.html, ['html']);
+gulp.task('js', function() {
+    browserify(config.paths.mainJs)
+        .transform(reactify)
+        .bundle()
+        .on('error', console.error.bind(console))
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest(config.paths.dist + '/scripts'))
+        .pipe(connect.reload());
+
 });
 
-gulp.task('default', ['html', 'open', 'watch']);
+gulp.task('css', () => {
+   gulp.src(config.paths.css)
+       .pipe(concat('bundle.css'))
+       .pipe(gulp.dest(config.paths.dist + '/css'));
+});
+
+gulp.task('watch', function() {
+    gulp.watch(config.paths.html, ['html']);
+    gulp.watch(config.paths.js, ['js']);
+    gulp.watch(config.paths.css, ['css']);
+});
+
+gulp.task('default', ['html', 'css', 'js', 'open', 'watch']);
