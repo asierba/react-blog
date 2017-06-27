@@ -4,7 +4,7 @@ const AboutPage = React.createClass({
     render: () => {
         return (
             <div>
-            about page
+                <h1>about page</h1>
             </div>
         );
     }
