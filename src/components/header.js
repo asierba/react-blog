@@ -5,6 +5,7 @@ const Header = React.createClass({
         return (
             <ul className="nav nav-tabs">
                 <li><a href="/">Home</a></li>
+                <li><a href="#posts">Posts</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
         )
