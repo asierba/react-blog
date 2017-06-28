@@ -3,6 +3,7 @@ const React = require('react');
 const HomePage = require('./components/homePage');
 const AboutPage = require('./components/aboutPage');
 const Header = require('./components/header');
+const PostsPage = require('./components/postsPage');
 
 const App = React.createClass({
     render: function() {
@@ -10,6 +11,7 @@ const App = React.createClass({
 
         switch(this.props.route) {
             case 'about': Page = AboutPage; break;
+            case 'posts': Page = PostsPage; break;
             default: Page = HomePage; break;
         }
         return (
