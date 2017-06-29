@@ -1,9 +1,9 @@
 $ = jQuery = require('jquery');
 const React = require('react');
-const HomePage = require('./components/homePage');
-const AboutPage = require('./components/aboutPage');
+const HomePage = require('./components/home/homePage');
+const AboutPage = require('./components/about/aboutPage');
 const Header = require('./components/header');
-const PostsPage = require('./components/postsPage');
+const PostsPage = require('./components/post/postsPage');
 
 const App = React.createClass({
     render: function() {
