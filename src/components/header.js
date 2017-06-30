@@ -10,7 +10,7 @@ const Header = React.createClass({
                 <li><Link to="posts">Posts</Link></li>
                 <li><Link to="about">About</Link></li>
             </ul>
-        )
+        );
     }
 });
 

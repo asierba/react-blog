@@ -3,16 +3,14 @@ const React = require('react');
 const Router = require('react-router');
 const DefaultRoute = Router.DefaultRoute;
 const Route = Router.Route;
-const HomePage = require('./components/home/homePage');
-const AboutPage = require('./components/about/aboutPage');
-const PostsPage = require('./components/post/postsPage');
-const App = require('./components/app');
+const NotFoundRoute = Router.NotFoundRoute;
 
-var routes = (
-    <Route name="/" handler={App}>
-        <DefaultRoute handler={HomePage}/>
-        <Route name="posts" handler={PostsPage}/>
-        <Route name="about" handler={AboutPage}/>
+const routes = (
+    <Route name="/" handler={require('./components/app')}>
+        <DefaultRoute handler={require('./components/home/homePage')}/>
+        <Route name="posts" handler={require('./components/post/postsPage')}/>
+        <Route name="about" handler={require('./components/about/aboutPage')}/>
+        <NotFoundRoute handler={require('./components/notFoundPage')} />
     </Route>
 );
 
