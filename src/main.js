@@ -1,31 +1,21 @@
 $ = jQuery = require('jquery');
 const React = require('react');
+const Router = require('react-router');
+const DefaultRoute = Router.DefaultRoute;
+const Route = Router.Route;
 const HomePage = require('./components/home/homePage');
 const AboutPage = require('./components/about/aboutPage');
-const Header = require('./components/header');
 const PostsPage = require('./components/post/postsPage');
+const App = require('./components/app');
 
-const App = React.createClass({
-    render: function() {
-        let Page;
+var routes = (
+    <Route name="/" handler={App}>
+        <DefaultRoute handler={HomePage}/>
+        <Route name="posts" handler={PostsPage}/>
+        <Route name="about" handler={AboutPage}/>
+    </Route>
+);
 
-        switch(this.props.route) {
-            case 'about': Page = AboutPage; break;
-            case 'posts': Page = PostsPage; break;
-            default: Page = HomePage; break;
-        }
-        return (
-            <div>
-                <Header/>
-                <Page></Page>
-            </div>
-        );
-    }
+Router.run(routes, (Handler) => {
+    React.render(<Handler/>, document.getElementById("app"));
 });
-
-function render() {
-    const route = window.location.hash.substr(1);
-    React.render(<App route={route}/>, document.getElementById("app"));
-}
-window.onhashchange = render;
-render();
