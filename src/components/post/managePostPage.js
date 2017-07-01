@@ -1,9 +1,10 @@
 const React = require('react');
+const PostForm = require('./postForm');
 
 const ManagePostPage = React.createClass({
     render: function () {
         return (
-            <h1>Manage Post</h1>
+            <PostForm/>
         );
     }
 });
