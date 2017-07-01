@@ -1,5 +1,7 @@
 const React = require('react');
 const PostList = require('./postList');
+const Router = require('react-router');
+const Link = Router.Link;
 
 const posts = [
     { title: 'Active recall and spaced repetition', date: 'Mar 23, 2017', id: 1},
@@ -22,6 +24,7 @@ const PostsPage = React.createClass({
             <div>
             <h2>All blog posts</h2>
             <PostList posts={this.state.posts}/>
+            <Link to="post" className="btn btn-default">Add new</Link>
             </div>
         );
     }
