@@ -1,8 +1,13 @@
 const React = require('react');
+const Router = require('react-router');
 const PostForm = require('./postForm');
 const PostApi = require('../../api/postApi');
+const toastr = require('toastr');
 
 const ManagePostPage = React.createClass({
+    mixins : [
+        Router.Navigation
+    ],
     getInitialState: () => {
         return { title: '', content: ''} ;
     },
@@ -20,6 +25,8 @@ const ManagePostPage = React.createClass({
     saveAuthor: function(event) {
         event.preventDefault();
         PostApi.savePost(this.state);
+        toastr.success('Post save! :)');
+        this.transitionTo('posts');
     }
 });
 
