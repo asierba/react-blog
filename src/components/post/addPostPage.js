@@ -8,6 +8,14 @@ const AddPostPage = React.createClass({
     mixins : [
         Router.Navigation
     ],
+
+    statics: {
+        willTransitionFrom : (transition, component) => {
+            if (component.state.dirty && !confirm('are you sure you want to leave this page without saving the changes?? :(')) {
+                transition.abort();
+            }
+        }
+    },
     getInitialState: () => {
         return { title: '', content: '', errors: {} } ;
     },
@@ -17,7 +25,7 @@ const AddPostPage = React.createClass({
         );
     },
     updatePost : function(event) {
-
+        this.setState({dirty: true});
         const value = event.target.value;
         const field = event.target.name;
         this.state[field] = value;
@@ -32,6 +40,7 @@ const AddPostPage = React.createClass({
         PostApi.savePost(this.state);
         toastr.success('Post save! :)');
         this.transitionTo('posts');
+        this.setState({dirty: false});
     },
     postIsValid: function() {
         let result = true;
