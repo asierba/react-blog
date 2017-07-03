@@ -4,7 +4,7 @@ const PostForm = require('./postForm');
 const PostApi = require('../../api/postApi');
 const toastr = require('toastr');
 
-const ManagePostPage = React.createClass({
+const AddPostPage = React.createClass({
     mixins : [
         Router.Navigation
     ],
@@ -13,16 +13,16 @@ const ManagePostPage = React.createClass({
     },
     render: function () {
         return (
-            <PostForm post={this.state} onChange={this.onChange} onSave={this.saveAuthor}/>
+            <PostForm post={this.state} onChange={this.updatePost} onSave={this.savePost}/>
         );
     },
-    onChange : function(event) {
+    updatePost : function(event) {
         const value = event.target.value;
         const field = event.target.name;
         this.state[field] = value;
         this.setState(this.state);
     },
-    saveAuthor: function(event) {
+    savePost: function(event) {
         event.preventDefault();
         PostApi.savePost(this.state);
         toastr.success('Post save! :)');
@@ -30,4 +30,4 @@ const ManagePostPage = React.createClass({
     }
 });
 
-module.exports = ManagePostPage;
+module.exports = AddPostPage;
