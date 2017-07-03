@@ -21,7 +21,7 @@ const PostsPage = React.createClass({
             <div>
             <h2>All blog posts</h2>
             <PostList posts={this.state.posts}/>
-            <Link to="post" className="btn btn-default">Add new</Link>
+            <Link to="addPost" className="btn btn-default">Add new</Link>
             </div>
         );
     }

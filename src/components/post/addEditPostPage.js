@@ -8,13 +8,21 @@ const AddPostPage = React.createClass({
     mixins : [
         Router.Navigation
     ],
-
     statics: {
         willTransitionFrom : (transition, component) => {
             if (component.state.dirty && !confirm('are you sure you want to leave this page without saving the changes?? :(')) {
                 transition.abort();
             }
         }
+    },
+    componentWillMount: function() {
+        const postId = this.props.params.id;
+
+
+        if (postId) {
+            const post = PostApi.getById(parseInt(postId));
+            this.setState(post)
+;        }
     },
     getInitialState: () => {
         return { title: '', content: '', errors: {} } ;

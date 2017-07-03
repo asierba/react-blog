@@ -5,6 +5,9 @@ const posts = [
 ];
 
 const PostApi = {
+    getById: function(id) {
+        return posts.find(x => x.id === id);
+    },
     getAll : function () {
         return posts;
     },
