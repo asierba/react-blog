@@ -15,7 +15,7 @@ const PostForm = React.createClass({
                 <div className="row">
                     <div className="col-md-6">
                         <form>
-                            <h1>Add Post</h1>
+                            <h1>Manage Post</h1>
 
                             <div className={getFromGroupClasses(this.props.post.errors.title)}>
                                 <label htmlFor="title">Title</label>
