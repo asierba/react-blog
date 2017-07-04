@@ -46,7 +46,7 @@ const AddPostPage = React.createClass({
             return;
 
         PostApi.savePost(this.state);
-        toastr.success('Post save! :)');
+        toastr.success('Post saved! :)');
         this.transitionTo('posts');
         this.setState({dirty: false});
     },
