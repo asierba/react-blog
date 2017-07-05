@@ -2,9 +2,9 @@ const React = require('react');
 const PostList = require('./postList');
 const Router = require('react-router');
 const Link = Router.Link;
-const PostApi = require('../../api/postApi');
+const PostStore = require('../../stores/postStore');
 
-const posts = PostApi.getAll();
+const posts = PostStore.getAll();
 
 const PostsPage = React.createClass({
     getInitialState: () => {
