@@ -1,7 +1,8 @@
 const React = require('react');
 const Router = require('react-router');
 const PostForm = require('./postForm');
-const PostApi = require('../../api/postApi');
+const PostStore = require('../../stores/postStore');
+const PostActions = require('../../actions/postActions');
 const toastr = require('toastr');
 
 const AddPostPage = React.createClass({
@@ -20,9 +21,9 @@ const AddPostPage = React.createClass({
 
 
         if (postId) {
-            const post = PostApi.getById(parseInt(postId));
-            this.setState(post)
-;        }
+            const post = PostStore.getById(parseInt(postId));
+            this.setState(post);
+        }
     },
     getInitialState: () => {
         return { title: '', content: '', errors: {} } ;
@@ -45,7 +46,7 @@ const AddPostPage = React.createClass({
         if (!this.postIsValid())
             return;
 
-        PostApi.savePost(this.state);
+        PostActions.createPost(this.state);
         toastr.success('Post saved! :)');
         this.transitionTo('posts');
         this.setState({dirty: false});

@@ -8,6 +8,7 @@ function editPost(post) {
     const postToUpdate = posts.find(x => x.id === post.id);
     postToUpdate.title = post.title;
     postToUpdate.content = post.content;
+    return postToUpdate;
 }
 
 function addPost(post) {
@@ -16,6 +17,7 @@ function addPost(post) {
     const newId = maxId + 1;
     post.id = newId;
     posts.push(post);
+    return post;
 }
 
 const PostApi = {
@@ -23,9 +25,9 @@ const PostApi = {
     getAll: () => posts,
     savePost: post => {
         if (post.id) {
-            editPost(post);
+            return editPost(post);
         } else {
-            addPost(post);
+            return addPost(post);
         }
     }
 };
