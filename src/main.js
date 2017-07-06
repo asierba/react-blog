@@ -4,6 +4,7 @@ const Router = require('react-router');
 const DefaultRoute = Router.DefaultRoute;
 const Route = Router.Route;
 const NotFoundRoute = Router.NotFoundRoute;
+const PostAcions = require('./actions/postActions');
 
 const routes = (
     <Route name="/" handler={require('./components/app')}>
@@ -15,6 +16,9 @@ const routes = (
         <NotFoundRoute handler={require('./components/notFoundPage')} />
     </Route>
 );
+
+
+PostAcions.initialisePosts();
 
 Router.run(routes, (Handler) => {
     React.render(<Handler/>, document.getElementById("app"));

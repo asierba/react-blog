@@ -1,7 +1,7 @@
 const Dispatcher = require('../dispatcher');
 const EventEmitter = require('events').EventEmitter;
 
-const posts = [];
+let posts = [];
 const PostStore = Object.assign({}, EventEmitter.prototype, {
     addChangeListener: function (callback) {
         this.on('change', callback);
@@ -20,6 +20,10 @@ Dispatcher.register(function(action) {
    switch (action.actionType) {
        case 'POST_CREATED':
            posts.push(action.post);
+           PostStore.emitChange();
+           break;
+       case 'POSTS_LOADED':
+           posts = action.posts;
            PostStore.emitChange();
            break;
    }
