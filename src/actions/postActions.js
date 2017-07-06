@@ -15,6 +15,13 @@ const PostActions = {
             actionType: 'POST_CREATED',
             post: newPost
         });
+    },
+    deletePost: (id) => {
+        PostApi.deletePost(id);
+        Dispatcher.dispatch({
+            actionType: 'POST_DELETED',
+            id: id
+        })
     }
 };
 

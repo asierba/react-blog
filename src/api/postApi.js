@@ -29,6 +29,9 @@ const PostApi = {
         } else {
             return addPost(post);
         }
+    },
+    deletePost: id => {
+        // we don't need this to work for this mock api
     }
 };
 

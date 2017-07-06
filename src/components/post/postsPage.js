@@ -11,6 +11,15 @@ const PostsPage = React.createClass({
             posts : PostStore.getAll()
         }
     },
+    _onChange: function() {
+        this.setState({posts: PostStore.getAll()})
+    },
+    componentWillMount: function() {
+        PostStore.addChangeListener(this._onChange);
+    },
+    componentWillUnmount: function() {
+        PostStore.removeChangeListener(this._onChange);
+    },
     render: function() {
         return (
             <div>
