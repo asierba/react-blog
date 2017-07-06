@@ -26,6 +26,11 @@ Dispatcher.register(function(action) {
            posts = action.posts;
            PostStore.emitChange();
            break;
+       case 'POST_DELETED':
+           const id = action.id;
+           posts = posts.filter(x => x.id !== id);
+           PostStore.emitChange();
+           break;
    }
 });
 
