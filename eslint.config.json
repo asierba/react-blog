@@ -16,7 +16,8 @@
     "no-unused-vars": 0,
     "no-underscore-dangle": 0,
     "no-alert": 0,
-    "no-lone-blocks": 0
+    "no-lone-blocks": 0,
+    "no-case-declarations": 0
   },
   "globals": {
     "jQuery": true,
@@ -25,6 +26,7 @@
   "env": {
     "browser": true,
     "node": true,
-    "jquery": true
+    "jquery": true,
+    "es6": "true"
   }
 }
