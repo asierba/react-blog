@@ -1,13 +1,14 @@
-var gulp = require('gulp');
-var connect = require('gulp-connect');
-var open = require('gulp-open');
+const gulp = require('gulp');
+const connect = require('gulp-connect');
+const open = require('gulp-open');
 const browserify = require('browserify');
 const reactify = require('reactify');
 const source = require('vinyl-source-stream');
 const concat = require('gulp-concat');
 const lint = require('gulp-eslint');
+const gls = require('gulp-live-server');
 
-var config = {
+const config = {
     port: 9005,
     devBaseUrl: 'http://localhost',
     paths: {
@@ -72,6 +73,11 @@ gulp.task('watch', function() {
     gulp.watch(config.paths.js, ['js']);
     gulp.watch(config.paths.js, ['lint']);
     gulp.watch(config.paths.css, ['css']);
+});
+
+gulp.task('express', function() {
+    const server = gls.new('src/server.js');
+    return server.start();
 });
 
 gulp.task('default', ['html', 'css', 'js', 'lint','open', 'watch']);

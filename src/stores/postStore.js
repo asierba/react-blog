@@ -19,18 +19,26 @@ const PostStore = Object.assign({}, EventEmitter.prototype, {
 Dispatcher.register(function(action) {
    switch (action.actionType) {
        case 'POST_CREATED':
-           posts.push(action.post);
-           PostStore.emitChange();
-           break;
+            const post = action.post;
+            const postToUpdate = posts.find(x => x.id = post.id);
+            if (postToUpdate) {
+                postToUpdate.title = post.title;
+                postToUpdate.content = post.content;
+            }
+            else {
+                posts.push(post);
+            }
+            PostStore.emitChange();
+            break;
        case 'POSTS_LOADED':
-           posts = action.posts;
-           PostStore.emitChange();
-           break;
+            posts = action.posts;
+            PostStore.emitChange();
+            break;
        case 'POST_DELETED':
-           const id = action.id;
-           posts = posts.filter(x => x.id !== id);
-           PostStore.emitChange();
-           break;
+            const id = action.id;
+            posts = posts.filter(x => x.id !== id);
+            PostStore.emitChange();
+            break;
    }
 });
 

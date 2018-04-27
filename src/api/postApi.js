@@ -4,25 +4,64 @@ const posts = [
     {title: 'From wordpress to jekyll', date: 'Feb 23, 2017', id: 3},
 ];
 
+const url = 'http://localhost:3000/post';
+
+
 function editPost(post) {
-    const postToUpdate = posts.find(x => x.id === post.id);
-    postToUpdate.title = post.title;
-    postToUpdate.content = post.content;
-    return postToUpdate;
+    return new Promise((resolve, reject) => {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("PUT", `${url}/${post.id}`, true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+                if (xmlhttp.status != 200) {
+                    throw 'something else other than 200 was returned';
+                }
+                resolve(JSON.parse(xmlhttp.responseText));
+            }
+        };
+
+        xmlhttp.send(JSON.stringify(post)); 
+    });
 }
 
 function addPost(post) {
-    const ids = posts.map(x => x.id);
-    const maxId = Math.max.apply(null, ids);
-    const newId = maxId + 1;
-    post.id = newId;
-    posts.push(post);
-    return post;
+    return new Promise((resolve, reject) => {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", url, true);
+        xmlhttp.setRequestHeader("Content-type", "application/json");
+        
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+                if (xmlhttp.status != 200) {
+                    throw 'something else other than 200 was returned';
+                }
+                resolve(JSON.parse(xmlhttp.responseText));
+            }
+        };
+
+        xmlhttp.send(JSON.stringify(post)); 
+    });
 }
 
 const PostApi = {
-    getById: id => posts.find(x => x.id === id),
-    getAll: () => posts,
+    getAll: () => {
+        return new Promise((resolve, reject) => {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+                    if (xmlhttp.status != 200) {
+                        throw 'something else other than 200 was returned';
+                    }
+                    resolve(JSON.parse(xmlhttp.responseText));
+                }
+            };
+
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        });
+    },
     savePost: post => {
         if (post.id) {
             return editPost(post);
@@ -31,7 +70,9 @@ const PostApi = {
         }
     },
     deletePost: id => {
-        // we don't need this to work for this mock api
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("DELETE", `${url}/${id}`, true);
+        xmlhttp.send(null);
     }
 };
 
